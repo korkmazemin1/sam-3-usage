@@ -1,0 +1,71 @@
+# ==============================================================================
+# UV & PYTHON ENVIRONMENT
+# ==============================================================================
+# The virtual environment directory created by 'uv'. 
+# We never commit the environment itself, only the dependency list.
+.venv/
+
+# Python compiled bytecode files (generated automatically)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Distribution / Packaging artifacts
+dist/
+build/
+*.egg-info/
+
+# ==============================================================================
+# SAM 3 & AI SPECIFIC (MODEL WEIGHTS & DATA)
+# ==============================================================================
+# Ignore heavy model weights to prevent bloating the repo.
+# Download these manually or via script, don't push to Git.
+*.pt
+*.pth
+*.onnx
+*.safetensors
+*.ckpt
+
+# SAM 3 Checkpoints specifically (if you download official weights)
+sam2_logs/
+checkpoints/
+
+# Datasets and Input Media
+# Keep your test images/videos local.
+data/
+datasets/
+assets/videos/
+*.mp4
+*.avi
+*.mkv
+*.jpg
+*.png
+*.jpeg
+
+# Output results (segmentation masks, processed videos)
+outputs/
+results/
+inference_logs/
+
+# ==============================================================================
+# SYSTEM & IDE SETTINGS
+# ==============================================================================
+# VS Code settings (optional: keep if you want to share workspace settings)
+.vscode/
+
+# PyCharm / IntelliJ settings
+.idea/
+
+# Mac OS specific
+.DS_Store
+
+# ==============================================================================
+# ENVIRONMENT VARIABLES
+# ==============================================================================
+# Contains API keys and secrets. NEVER COMMIT THIS.
+.env
+.env.local
+
+# Note: Do NOT ignore 'uv.lock' or 'pyproject.toml'. 
+# These are essential for project reproducibility.

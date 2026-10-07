@@ -1,0 +1,89 @@
+[project]
+name = "sam-3-usage"
+version = "0.1.0"
+description = "SAM3 usage environment with merged dependencies"
+readme = "README.md"
+# SAM3 supports Python 3.12, so we keep this modern version.
+requires-python = ">=3.12"
+
+dependencies = [
+    # --- Core Deep Learning & Models ---
+    # The main framework for deep learning (GPU support via [tool.uv] below).
+    "torch>=2.5.1",
+    "torchvision>=0.20.1",
+    
+    # Library for state-of-the-art Transformer models (Hugging Face).
+    "transformers>=4.57.3",
+    
+    # PyTorch Image Models: Essential backbone for computer vision architectures.
+    "timm>=1.0.17",
+    
+    # Client to download and manage models from the Hugging Face Hub.
+    "huggingface_hub",
+
+    # flexible tensor operations (Crucial for Transformer architectures like SAM3).
+    "einops",
+
+    # --- Image & Video Processing ---
+    # Standard library for computer vision tasks.
+    "opencv-python>=4.11.0.86",
+    
+    # Python Imaging Library: Basic image opening and manipulation.
+    "pillow>=12.0.0",
+    
+    # Pythonic binding for FFmpeg: Used for video decoding/encoding.
+    "av>=16.0.1",
+    
+    # Algorithms for image processing (filtering, morphology, etc.).
+    "scikit-image",
+
+    # --- Data Science & Mathematics ---
+    # Fundamental package for scientific computing. 
+    # NOTE: Pinned to <2.0 because many vision libraries are not yet compatible with Numpy 2.x.
+    "numpy>=1.26,<2.0",
+    
+    # Data analysis and manipulation tool (DataFrames).
+    "pandas>=2.3.3",
+    
+    # Advanced scientific and technical computing algorithms.
+    "scipy>=1.16.3",
+    
+    # Plotting and visualization library.
+    "matplotlib>=3.10.8",
+
+    # --- Utilities & Configuration ---
+    # Fast, extensible progress bar for loops.
+    "tqdm>=4.67.1",
+    
+    # Framework for configuring complex applications (managing YAML/config files).
+    "hydra-core>=1.3.2",
+    
+    # Common I/O abstraction library used by Meta's research projects.
+    "iopath>=0.1.10",
+    
+    # Fixes broken Unicode text; often required for text encoders in multimodal models.
+    "ftfy==6.1.1",
+    
+    # Alternative regular expression module, replaces Python's built-in re.
+    "regex",
+    
+    # YAML parser and emitter.
+    "pyyaml>=6.0.3",
+    
+    # Backported type hints for older Python versions (ensures compatibility).
+    "typing_extensions",
+]
+
+[tool.uv]
+# --- GPU / CUDA Configuration ---
+# Explicitly defines the PyTorch repository to ensure the CUDA (NVIDIA) version is installed
+# instead of the default CPU-only version.
+[[tool.uv.index]]
+name = "pytorch_cu121"
+url = "https://download.pytorch.org/whl/cu121"
+explicit = true
+
+# Maps the torch packages to the CUDA repository defined above.
+[tool.uv.sources]
+torch = { index = "pytorch_cu121" }
+torchvision = { index = "pytorch_cu121" }
